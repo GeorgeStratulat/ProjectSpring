@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Beverages</title>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+
+
+</head>
+<body>
+<div class="wrapper">
+    <div class="sidenav">
+        <div class="photo">
+            <img src="2.jpg"/>
+        </div>
+        <div style="text-transform: uppercase;letter-spacing:5px;font-size: 1em;text-align: center;max-width: 100%; margin: 0 auto;color:#fff;">Best Dentist</div>
+        <a th:href="@{Add_Patients}">Add patients</a>
+        <a href="#services">Services</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-transparent navbar-absolut">
+            <a class="navbar-brand">Best Dentist</a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
+
+        <form action="#" th:action="@{/saveEdit}" th:object="${patient}" class="" method="post" >
+
+            <input type="hidden" id="id" name="id" placeholder="id" th:value="${patient.id}"></input>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Name:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" name="name" id="name" th:value="${patient.name}"></input>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Affections:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" name="affections" id="affections" th:value="${patient.affections}"></input>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" >CPR:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" name="cpr" id="cpr" th:value="${patient.cpr}"></input>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Email:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" name="email" id="email" th:value="${patient.email}"></input>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Phone number:</label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" name="phone_number" id="phone_number" th:value="${patient.phone_number}"></input>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark" >Save patient</button>
+
+        </form>
+
+    </div>
+
+</div>
+</body>
+</html>

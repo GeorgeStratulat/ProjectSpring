@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Calendar</title>
+    <link rel='stylesheet' href='fullcalendar-3.9.0/fullcalendar.css' />
+    <script src='fullcalendar-3.9.0/lib/jquery.min.js'></script>
+    <script src='fullcalendar-3.9.0/lib/moment.min.js'></script>
+    <script src='fullcalendar-3.9.0/fullcalendar.js'></script>
+
+</head>
+<body th:each="date:${dates}">
+
+<p id="title" th:value="${date.name}"></p>
+<p id="start" th:value="${date.date_start}"></p>
+<p id="end" th:value="${date.date_end}"></p>
+
+<script th:inline="javascript">
+
+
+    $(function() {
+
+        // page is now ready, initialize the calendar...
+        var title1 = document.getElementById("title").valueOf();
+        var start1 = document.getElementById("start").valueOf();
+        var end1 = document.getElementById("end").valueOf();
+        console.log(title1);
+        console.log(start1);
+        console.log(end1);
+        var momStart = $.fullCalendar.moment(start1, "YYYY-MM-DDTHH:MM:SS");
+        console.log(momStart);
+
+        $('#calendar').fullCalendar({
+
+
+            events : [
+                {
+                title: title1,
+                start: start1,
+                    end: end1
+                }
+            ]
+
+        });
+    });
+</script>
+
+<div id='calendar'></div>
+
+</body>
+</html>

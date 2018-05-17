@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Beverages</title>
+    <link rel="stylesheet" href="style.css" type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+
+    <div class="sidenav">
+        <div class="photo">
+            <img src="2.jpg"/>
+        </div>
+        <div style="text-transform: uppercase;letter-spacing:5px;font-size: 1em;text-align: center;max-width: 100%; margin: 0 auto;color:#fff;">Best Dentist</div>
+        <a th:href="@{Add_Patients}">Add patients</a>
+        <a th:href="@{Get_Calendar}">Calendar</a>
+        <a href="#clients">Clients</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-transparent navbar-absolut">
+            <a class="navbar-brand">Best Dentist</a>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone number</th>
+                <th>Affections</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="patient :${patientList}">
+                <td th:text="${patient.id}"></td>
+                <td th:text="${patient.name}"></td>
+                <td th:text="${patient.phone_number}"></td>
+                <td th:text="${patient.affections}"></td>
+                <td th:text="${patient.email}"></td>
+                <td>
+                    <a href="#" th:href="@{view(id=${patient.id})}" type="button" class="btn">
+                    <span class="glyphicon glyphicon-folder-open"></span>View
+                    </a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{edit(id=${patient.id})}" type="button" class="btn btn-info">
+                        <span class="glyphicon glyphicon-pencil"></span>Edit
+                    </a>
+                </td>
+                <td>
+                    <a href="#" th:href="@{delete(id=${patient.id})}" type="button" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
