@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import project.models.*;
 
+import javax.jws.WebParam;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,20 @@ public class IndexController{
     DateRepository dateRepo;
         @Autowired
     EventRepository eventRepo;
+        @Autowired
+        TeethRepository teethRepo;
 
     @GetMapping("/")
     public ModelAndView doHome() {
         ModelAndView mv = new ModelAndView("index");
       mv.getModel().put("patientList", patientRepo.findAll());
+        return mv;
+    }
+
+    @GetMapping("/patients")
+    public ModelAndView getPatients() {
+        ModelAndView mv = new ModelAndView("index");
+        mv.getModel().put("patientList", patientRepo.findAll());
         return mv;
     }
 
@@ -50,6 +60,20 @@ public class IndexController{
         return mv;
     }
 
+    @ResponseBody
+    @RequestMapping(value="/greeting", method = RequestMethod.GET)
+    public String Greeting(){
+        return "Message From SpringBoot Service - Hello World!";
+    }
+
+
+
+    @GetMapping(value = "/teeth")
+    public ModelAndView getTeeth(){
+        ModelAndView mv = new ModelAndView("teeth.html");
+        return mv;
+    }
+
     @GetMapping(value = "/Get_Calendar")
     public ModelAndView getCalendar(){
         ModelAndView mv = new ModelAndView("jsoncalendar.html");
@@ -62,6 +86,9 @@ public class IndexController{
                                @RequestParam(name="phone_number") String phone_number){
     Patient patient = new Patient(name, affections, cpr, email, phone_number);
     patientRepo.save(patient);
+    Teeth teeth = new Teeth();
+    teeth.setId(patient.getId());
+    teethRepo.save(teeth);
     ModelAndView mv = new ModelAndView("redirect:/");
     return mv;
     }
@@ -99,6 +126,14 @@ public class IndexController{
         mv.getModel().put("eventList", eventList);
         return mv;
     }
+
+    @GetMapping(value = "/teethtest")
+    public ModelAndView getTeethTest(@RequestParam(name="id") int id){
+        ModelAndView mv = new ModelAndView("teethtest.html");
+        mv.getModel().put("patient", patientRepo.findById(id).orElse(null));
+        return mv;
+    }
+
 
     @RequestMapping(value = "/saveEdit", method = RequestMethod.POST)
     public ModelAndView saveEdit(@RequestParam(name="id") int id, @RequestParam(name="name") String name, @RequestParam(name="affections") String affections,

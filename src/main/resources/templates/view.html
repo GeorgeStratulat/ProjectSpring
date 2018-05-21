@@ -4,13 +4,14 @@
     <meta charset="UTF-8"/>
     <title>Beverages</title>
     <link rel="stylesheet" href="style.css" type="text/css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
-          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 </head>
 <body>
-<div class="wrapper">
+<br class="wrapper">
     <div class="sidenav">
         <div class="photo">
             <img src="2.jpg"/>
@@ -31,12 +32,12 @@
             </form>
         </nav>
 
-        <div class="table-responsive panel">
+        <br class="table-responsive panel">
             <table class="table"  th:object="${patient}">
                 <tbody>
 
                 <tr>
-                    <td class="text-success"><i class="fa fa-user"></i>Id</td>
+                    <td id="patient_id" class="text-success"><i class="fa fa-user"></i>Id</td>
                     <td th:text="${patient.id}"></td>
                 </tr>
                 <tr>
@@ -58,7 +59,20 @@
 
                 </tbody>
             </table>
-        </div>
+
+        </br>
+            <a href="#" th:href="@{teethtest(id=${patient.id})}" type="button" class="btn btn-info">
+                <span class="glyphicon glyphicon-pencil"></span>View teeth
+            </a>
+
+    </div>
+
+
+<script>
+    $.cookie("patient_id", $("#patient_id").val() , { path: '/' });
+</script>
+
+
 
 <table class="table table-hover">
     <thead>
@@ -80,6 +94,7 @@
     </tbody>
 
 </table>
+
 
 
         </div>

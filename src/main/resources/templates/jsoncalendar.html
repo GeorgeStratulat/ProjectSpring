@@ -252,7 +252,7 @@
                         center: 'title',
                         right: 'month,agendaWeek,agendaDay'
                     },
-                    defaultDate: moment().format("YYYY-MM-DDTHH:mm:ss"),
+                    defaultDate: moment().format("YYYY-MM-DD"),
                     editable: true,
                     eventLimit: true, // allow "more" link when too many events
                     events: {
@@ -260,7 +260,6 @@
                         type: 'GET',
                         error: function() {
                             alert('there was an error while fetching events!');
-
                         },
                         //color: 'blue',   // a non-ajax option
                         //textColor: 'white' // a non-ajax option
